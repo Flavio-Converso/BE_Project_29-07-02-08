@@ -1,4 +1,5 @@
 using BE_Project_29_07_02_08.Context;
+using BE_Project_29_07_02_08.Services.Products;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,8 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var conn = builder.Configuration.GetConnectionString("DB");
-builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlServer(conn));
+builder.Services
+    .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn));
 
+
+builder.Services
+
+    .AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
@@ -25,6 +31,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
