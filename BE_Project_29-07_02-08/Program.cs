@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//DATACONTEXT
 var conn = builder.Configuration.GetConnectionString("DB");
 builder.Services
     .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn));
 
-
+//SERVIZI
 builder.Services
-
     .AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
