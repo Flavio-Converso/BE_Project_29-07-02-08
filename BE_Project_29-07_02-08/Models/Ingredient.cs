@@ -7,7 +7,7 @@ namespace BE_Project_29_07_02_08.Models
     public class Ingredient
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //todo: [JsonIgnore]
+        //todo:da verificare [JsonIgnore]
         public int IdIngredient { get; set; }
 
         [Required]
