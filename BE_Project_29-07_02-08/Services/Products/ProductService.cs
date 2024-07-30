@@ -18,10 +18,18 @@ namespace BE_Project_29_07_02_08.Services.Products
         {
             return await _dataContext.Ingredients.ToListAsync();
         }
-
         public async Task<Product> CreateProductAsync(ProductCreateViewModel viewModel)
         {
             var product = viewModel.Product;
+
+            if (viewModel.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await viewModel.Image.CopyToAsync(memoryStream);
+                    product.Image = memoryStream.ToArray();
+                }
+            }
 
             product.Ingredients = await _dataContext.Ingredients
                 .Where(i => viewModel.SelectedIngredientIds.Contains(i.IdIngredient))
@@ -32,6 +40,7 @@ namespace BE_Project_29_07_02_08.Services.Products
 
             return product;
         }
+
 
         public async Task<List<Product>> GetAllProductswIngredientsAsync()
         {

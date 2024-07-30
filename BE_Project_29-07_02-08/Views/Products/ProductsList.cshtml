@@ -13,8 +13,9 @@
             <th>Name</th>
             <th>Price</th>
             <th>Delivery Time (min)</th>
+            <th>Image</th>
             <th>Ingredients</th>
-            
+           
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,16 @@
                 <td>@product.Name</td>
                 <td>@product.Price.ToString("C")</td>
                 <td>@product.DeliveryTimeMin</td>
+                <td>
+                    @if (product.Image != null && product.Image.Length > 0)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(product.Image)" alt="@product.Name" style="width: 100px; height: auto;" />
+                    }
+                    else
+                    {
+                        <span>No image</span>
+                    }
+                </td>
                 <td>
                     @if (product.Ingredients.Any())
                     {
