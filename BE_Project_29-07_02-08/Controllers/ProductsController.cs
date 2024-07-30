@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
-    [ApiController]
-    [Route("Products")]
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
@@ -15,36 +13,35 @@ namespace BE_Project_29_07_02_08.Controllers
             _productService = productService;
         }
 
-        [HttpGet("Create")]
-        public IActionResult Create()
+        [HttpGet("Products/CreateProducts")]
+        public IActionResult CreateProducts()
         {
             return View();
         }
 
-        [HttpPost("Create")]
+        [HttpPost("Products/Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product product)
+        public IActionResult CreateProducts(Product product)
         {
             if (ModelState.IsValid)
             {
                 _productService.CreateProduct(product);
-                return RedirectToAction("Index");
+                return RedirectToAction("ProductsList");
             }
             return View(product);
         }
 
-        [HttpGet("api/products")]
+        [HttpGet("Products/GetProductsJson")]
         public ActionResult<List<Product>> GetProductsJson()
         {
             var products = _productService.GetAllProducts();
             return Ok(products);
         }
 
-        [HttpGet("list")]
-        public IActionResult ListProducts()
+        [HttpGet("Products/ProductsList")]
+        public IActionResult ProductsList()
         {
-            var products = _productService.GetAllProducts();
-            return View(products);
+            return View();
         }
     }
 }

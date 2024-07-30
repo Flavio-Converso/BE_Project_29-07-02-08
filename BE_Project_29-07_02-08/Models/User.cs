@@ -10,16 +10,16 @@ namespace BE_Project_29_07_02_08.Models
 
         [Required]
         [StringLength(20)]
-        public string Username { get; set; }
+        public required string Username { get; set; }
 
         [Required]
         [EmailAddress]
         [StringLength(50)]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
         // Riferimenti EF
         public List<Role> Roles { get; set; } = new List<Role>();

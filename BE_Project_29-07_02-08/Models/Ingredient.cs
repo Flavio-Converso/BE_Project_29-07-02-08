@@ -10,7 +10,7 @@ namespace BE_Project_29_07_02_08.Models
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
 
         // Riferimenti EF

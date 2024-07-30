@@ -10,18 +10,20 @@ namespace BE_Project_29_07_02_08.Models
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required]
         [Range(0, 1000)]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        [Required]
-        public byte[] Image { get; set; }
 
         [Required]
-        [Range(0, 1000)]
-        public int DeliveryTime { get; set; }
+        public required byte[] Image { get; set; }
+
+        [Required]
+        [Range(0, 60)]
+        public int DeliveryTimeMin { get; set; }
 
 
         // Riferimenti EF
