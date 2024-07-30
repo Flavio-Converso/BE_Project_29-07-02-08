@@ -1,5 +1,7 @@
 ﻿using BE_Project_29_07_02_08.Context;
 using BE_Project_29_07_02_08.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace BE_Project_29_07_02_08.Services.Products
 {
@@ -12,16 +14,16 @@ namespace BE_Project_29_07_02_08.Services.Products
             _dataContext = context;
         }
 
-        public Product CreateProduct(Product product)
+        public async Task<Product> CreateProductAsync(Product product)
         {
-            _dataContext.Products.Add(product);
-            _dataContext.SaveChanges();
+            await _dataContext.Products.AddAsync(product);
+            await _dataContext.SaveChangesAsync();
             return product;
         }
 
-        public List<Product> GetAllProducts()
+        public async Task<List<Product>> GetAllProductsAsync()
         {
-            return _dataContext.Products.ToList();
+            return await _dataContext.Products.ToListAsync();
         }
     }
 }

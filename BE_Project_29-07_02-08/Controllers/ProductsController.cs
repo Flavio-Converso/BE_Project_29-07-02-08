@@ -21,20 +21,20 @@ namespace BE_Project_29_07_02_08.Controllers
 
         [HttpPost("Products/Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateProducts(Product product)
+        public async Task<IActionResult> CreateProducts(Product product)
         {
             if (ModelState.IsValid)
             {
-                _productService.CreateProduct(product);
+                await _productService.CreateProductAsync(product);
                 return RedirectToAction("ProductsList");
             }
             return View(product);
         }
 
         [HttpGet("Products/GetProductsJson")]
-        public ActionResult<List<Product>> GetProductsJson()
+        public async Task<ActionResult<List<Product>>> GetProductsJson()
         {
-            var products = _productService.GetAllProducts();
+            var products = await _productService.GetAllProductsAsync();
             return Ok(products);
         }
 
