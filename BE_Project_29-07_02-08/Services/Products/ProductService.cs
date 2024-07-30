@@ -18,7 +18,7 @@ namespace BE_Project_29_07_02_08.Services.Products
         {
             return await _dataContext.Ingredients.ToListAsync();
         }
-        public async Task<Product> CreateProductAsync(ProductCreateViewModel viewModel)
+        public async Task<Product> CreateProductwIngredientsAsync(ProductCreateViewModel viewModel)
         {
             var product = viewModel.Product;
 

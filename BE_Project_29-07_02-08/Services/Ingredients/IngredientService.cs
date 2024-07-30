@@ -6,12 +6,9 @@ namespace BE_Project_29_07_02_08.Services.Ingredients
     {
         public Ingredient CreateIngredient(Ingredient ingredient)
         {
-            throw new NotImplementedException(); //todo
+            throw new NotImplementedException(); //todo opzionale
         }
 
-        public List<Ingredient> GetAllIngredients(int IdProduct)
-        {
-            throw new NotImplementedException(); //todo
-        }
+
     }
 }
