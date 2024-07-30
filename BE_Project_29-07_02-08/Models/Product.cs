@@ -18,8 +18,8 @@ namespace BE_Project_29_07_02_08.Models
         public decimal Price { get; set; }
 
 
-        [Required]
-        public required byte[] Image { get; set; }
+
+        public byte[]? Image { get; set; }
 
         [Required]
         [Range(0, 60)]

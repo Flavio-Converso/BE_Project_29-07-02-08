@@ -19,7 +19,7 @@ namespace BE_Project_29_07_02_08.Controllers
             return View();
         }
 
-        [HttpPost("Products/Create")]
+        [HttpPost("Products/CreateProducts")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProducts(Product product)
         {

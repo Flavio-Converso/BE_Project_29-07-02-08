@@ -1,4 +1,5 @@
-﻿let basePath = "/Products/GetProductsJson";
+﻿//todo:gestisci in caso non siano recuperati i dati degli ingredienti nei prodotti.
+let basePath = "/Products/GetProductsJson";
 
 function getProductsList() {
     const productList = $('#productList');
@@ -24,15 +25,15 @@ function getProductsList() {
                     //join: Combina tutti i valori in una singola stringa, con un separatore specificato(,).
 
                     //todo:
+                    // <li> <img src="${image}" alt="${name}" /> </li>
                     //ES.
-                    //productList.append
-                    //    (` 
-                    //    <li> ${name} </li>
-                    //    <li> ${price} </li>
-                    //    <li> <img src="${image}" alt="${name}" /> </li>
-                    //    <li> ${deliveryTime} </li>
-                    //    <li> ${ingredientsList} </li>      
-                    //`);
+                    productList.append
+                        (` 
+                        <li> ${name} </li>
+                        <li> ${price} </li>
+                        <li> ${deliveryTime} </li>
+                        <li> ${ingredientsList} </li>      
+                    `);
                 });
             } else {
                 productList.append('<li>No products available</li>');
