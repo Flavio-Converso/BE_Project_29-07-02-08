@@ -23,7 +23,9 @@ namespace BE_Project_29_07_02_08.Services.Products
 
         public async Task<List<Product>> GetAllProductsAsync()
         {
-            return await _dataContext.Products.ToListAsync();
+            return await _dataContext.Products
+        .Include(p => p.Ingredients) // Include the related ingredients
+        .ToListAsync();
         }
     }
 }

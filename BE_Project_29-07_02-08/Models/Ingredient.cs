@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BE_Project_29_07_02_08.Models
@@ -6,6 +7,7 @@ namespace BE_Project_29_07_02_08.Models
     public class Ingredient
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //todo: [JsonIgnore]
         public int IdIngredient { get; set; }
 
         [Required]
@@ -14,6 +16,7 @@ namespace BE_Project_29_07_02_08.Models
 
 
         // Riferimenti EF
+        [JsonIgnore]
         public List<Product> Products { get; set; } = new List<Product>();
     }
 }

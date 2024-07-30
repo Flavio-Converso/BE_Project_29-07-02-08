@@ -24,7 +24,7 @@ function getProductsList() {
                     //join: Combina tutti i valori in una singola stringa, con un separatore specificato(,).
 
                     //todo:
-                    //
+                    //ES.
                     //productList.append
                     //    (` 
                     //    <li> ${name} </li>
