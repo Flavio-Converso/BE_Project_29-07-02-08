@@ -13,7 +13,10 @@ namespace BE_Project_29_07_02_08.Services.Products
         {
             _dataContext = context;
         }
-
+        public async Task<List<Ingredient>> GetAllIngredientsAsync()
+        {
+            return await _dataContext.Ingredients.ToListAsync();
+        }
         public async Task<Product> CreateProductAsync(Product product)
         {
             await _dataContext.Products.AddAsync(product);

@@ -1,39 +1,39 @@
-﻿@model BE_Project_29_07_02_08.Models.Product
+﻿@model BE_Project_29_07_02_08.Models.ViewModels.ProductCreateViewModel;
 
-@{
-    ViewData["Title"] = "Create Product";
-}
+<form asp-action="CreateProducts" method="post">
+    <div class="form-group">
+        <label asp-for="Product.Name"></label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
 
-<h2>Create Product</h2>
+    <div class="form-group">
+        <label asp-for="Product.Price"></label>
+        <input asp-for="Product.Price" class="form-control" />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
 
-<form asp-action="CreateProducts" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="Product.DeliveryTimeMin"></label>
+        <input asp-for="Product.DeliveryTimeMin" class="form-control" />
+        <span asp-validation-for="Product.DeliveryTimeMin" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
+        <label>Ingredients</label>
+        <div>
+            @for (int i = 0; i < Model.Ingredients.Count; i++)
+            {
+                <div>
+                    <input type="checkbox"
+                           name="SelectedIngredientIds"
+                           value="@Model.Ingredients[i].IdIngredient"
+                    @(Model.SelectedIngredientIds.Contains(Model.Ingredients[i].IdIngredient) ? "checked" : "") />
+                    <label>@Model.Ingredients[i].Name</label>
+                </div>
+            }
+        </div>
     </div>
-   @*  <div class="form-group">
-        <label asp-for="Image" class="control-label"></label>
-        <input asp-for="Image" type="file" class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div> *@
-    <div class="form-group">
-        <label asp-for="DeliveryTimeMin" class="control-label"></label>
-        <input asp-for="DeliveryTimeMin" class="form-control" />
-        <span asp-validation-for="DeliveryTimeMin" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
+
+    <button type="submit" class="btn btn-primary">Create Product</button>
 </form>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

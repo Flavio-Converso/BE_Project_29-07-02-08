@@ -6,5 +6,6 @@ namespace BE_Project_29_07_02_08.Services.Products
     {
         Task<Product> CreateProductAsync(Product product);
         Task<List<Product>> GetAllProductsAsync();
+        Task<List<Ingredient>> GetAllIngredientsAsync();
     }
 }
