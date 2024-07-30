@@ -16,7 +16,8 @@ namespace BE_Project_29_07_02_08.Controllers
             _productService = productService;
             _dataContext = dataContext;
         }
-
+        //todo: move to service
+        //todo: handle img
         [HttpGet("Products/CreateProducts")]
         public async Task<IActionResult> CreateProducts()
         {
@@ -33,7 +34,8 @@ namespace BE_Project_29_07_02_08.Controllers
             };
             return View(viewModel);
         }
-
+        //todo: move to service
+        //todo: handle img
         [HttpPost("Products/CreateProducts")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProducts(ProductCreateViewModel viewModel)
