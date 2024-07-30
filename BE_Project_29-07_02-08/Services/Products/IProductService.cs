@@ -1,11 +1,12 @@
 ﻿using BE_Project_29_07_02_08.Models;
+using BE_Project_29_07_02_08.Models.ViewModels;
 
 namespace BE_Project_29_07_02_08.Services.Products
 {
     public interface IProductService
     {
-        Task<Product> CreateProductAsync(Product product);
-        Task<List<Product>> GetAllProductsAsync();
         Task<List<Ingredient>> GetAllIngredientsAsync();
+        Task<Product> CreateProductAsync(ProductCreateViewModel viewModel);
+        Task<List<Product>> GetAllProductswIngredientsAsync();
     }
 }
