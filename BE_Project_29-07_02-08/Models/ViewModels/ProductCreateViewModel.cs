@@ -2,7 +2,7 @@
 {
     public class ProductCreateViewModel
     {
-        public Product Product { get; set; }
+        public required Product Product { get; set; }
         public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
         public List<int> SelectedIngredientIds { get; set; } = new List<int>();
 

@@ -37,7 +37,7 @@ namespace BE_Project_29_07_02_08.Controllers
         {
             if (ModelState.IsValid)
             {
-                var product = await _productService.CreateProductwIngredientAsync(viewModel);
+                var product = await _productService.CreateProductwIngredientsAsync(viewModel);
                 return RedirectToAction("ProductsList");
             }
             return View(viewModel);

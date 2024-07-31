@@ -1,7 +1,11 @@
-﻿namespace BE_Project_29_07_02_08.Services.Auth
+﻿using BE_Project_29_07_02_08.Models;
+
+namespace BE_Project_29_07_02_08.Services.Auth
 {
     public interface IAuthService
     {
-        //todo
+        public Task<User> RegisterAsync(User user);
+        public Task<User> LoginAsync(User user);
+
     }
 }

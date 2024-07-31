@@ -1,15 +1,20 @@
 using BE_Project_29_07_02_08.Context;
+using BE_Project_29_07_02_08.Services.Auth;
 using BE_Project_29_07_02_08.Services.Products;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
+builder.Services.AddControllersWithViews();
+
+//AUTH
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
     {
-        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include; //todo: da verificare
+        options.LoginPath = "/Auth/Register";
     });
 
 
@@ -20,7 +25,8 @@ builder.Services
 
 //SERVIZI
 builder.Services
-    .AddScoped<IProductService, ProductService>();
+    .AddScoped<IProductService, ProductService>()
+    .AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

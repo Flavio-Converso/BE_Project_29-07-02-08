@@ -16,12 +16,12 @@ namespace BE_Project_29_07_02_08.Models
         public int IdOrder { get; set; }
 
         [ForeignKey("IdOrder")]
-        public Order Order { get; set; }
+        public required Order Order { get; set; }
 
         [Required]
         public int IdProduct { get; set; }
 
         [ForeignKey("IdProduct")]
-        public Product Product { get; set; }
+        public required Product Product { get; set; }
     }
 }
