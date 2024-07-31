@@ -3,6 +3,7 @@ using BE_Project_29_07_02_08.Services.Auth;
 using BE_Project_29_07_02_08.Services.Products;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,19 @@ builder.Services
     .AddCookie(options =>
     {
         options.LoginPath = "/Auth/Register";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+        options.Cookie.SameSite = SameSiteMode.Strict;
     });
 
+//POLICY
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+    {
+        policy.RequireClaim(ClaimTypes.Role, "admin");
+    });
+});
 
 //DATACONTEXT
 var conn = builder.Configuration.GetConnectionString("DB");

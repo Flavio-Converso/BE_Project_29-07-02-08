@@ -21,10 +21,17 @@ namespace BE_Project_29_07_02_08.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(User user)
+        public async Task<IActionResult> Register(User u)
         {
-            await _authService.RegisterAsync(user);
-            return RedirectToAction("Login", "Auth");
+            try
+            {
+                await _authService.RegisterAsync(u);
+                return RedirectToAction("Login", "Auth");
+            }
+            catch (Exception ex)
+            {
+                return View(u);
+            }
         }
 
         public IActionResult Login()
@@ -34,22 +41,38 @@ namespace BE_Project_29_07_02_08.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(User u)
+        public async Task<IActionResult> Login(User user)
         {
-            var user = await _authService.LoginAsync(u);
-            if (user == null)
+            try
             {
-                return RedirectToAction("Register", "Auth");
+                var existingUser = await _authService.LoginAsync(user);
+                if (existingUser == null)
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
+                    return View(user);
+                }
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, existingUser.Username)
+                };
+
+                existingUser.Roles.ForEach(r =>
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, r.Name));
+                });
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                return RedirectToAction("ProductsList", "Products");
             }
-            var claims = new List<Claim>
+            catch (Exception ex)
             {
-             new Claim(ClaimTypes.Name, u.Username)
-            };
-
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-            return RedirectToAction("ProductsList", "Products");
+                return View(user);
+            }
         }
 
         public async Task<IActionResult> Logout()

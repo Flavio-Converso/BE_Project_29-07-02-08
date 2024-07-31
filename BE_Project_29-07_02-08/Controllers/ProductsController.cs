@@ -1,6 +1,7 @@
 ﻿using BE_Project_29_07_02_08.Models;
 using BE_Project_29_07_02_08.Models.ViewModels;
 using BE_Project_29_07_02_08.Services.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BE_Project_29_07_02_08.Controllers
@@ -13,7 +14,7 @@ namespace BE_Project_29_07_02_08.Controllers
         {
             _productService = productService;
         }
-
+        [Authorize(Policy = "AdminPolicy")]
         [HttpGet("Products/CreateProducts")]
         public async Task<IActionResult> CreateProducts()
         {
@@ -30,7 +31,7 @@ namespace BE_Project_29_07_02_08.Controllers
             };
             return View(viewModel);
         }
-
+        //[Authorize(Policy = "AdminPolicy")]
         [HttpPost("Products/CreateProducts")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProducts(ProductCreateViewModel viewModel)

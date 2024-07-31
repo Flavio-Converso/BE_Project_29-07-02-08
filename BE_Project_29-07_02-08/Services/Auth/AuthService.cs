@@ -14,6 +14,8 @@ namespace BE_Project_29_07_02_08.Services.Auth
 
         public async Task<User> RegisterAsync(User user)
         {
+            var userRole = await _dataContext.Roles.Where(r => r.IdRole == 2).FirstOrDefaultAsync();
+            user.Roles.Add(userRole);
             await _dataContext.Users.AddAsync(user);
             await _dataContext.SaveChangesAsync();
             return user;
@@ -22,9 +24,15 @@ namespace BE_Project_29_07_02_08.Services.Auth
 
         public async Task<User> LoginAsync(User user)
         {
-            await _dataContext.Users
+            var existingUser = await _dataContext.Users
+                 .Include(u => u.Roles)
                  .Where(u => u.Username == user.Username && u.Password == user.Password).FirstOrDefaultAsync();
-            return user;
+
+            if (existingUser == null)
+            {
+                throw new Exception("Invalid username or password.");
+            }
+            return existingUser;
         }
 
 
