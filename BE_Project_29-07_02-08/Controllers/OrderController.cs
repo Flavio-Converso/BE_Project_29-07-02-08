@@ -39,6 +39,12 @@ namespace BE_Project_29_07_02_08.Controllers
             return Ok(processedOrdersCount);
         }
 
-
+        [HttpGet]
+        public async Task<IActionResult> GetTotalIncome()
+        {
+            var totalIncome = await _dataContext.Orders.SumAsync(o => o.TotalAmount);
+            return Ok(totalIncome);
+        }
     }
 }
+
