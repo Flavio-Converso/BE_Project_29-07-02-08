@@ -5,7 +5,7 @@
 }
 
 <h1>Products List</h1>
-
+<a href="@Url.Action("CreateProducts", "Products")" class="btn btn-success">Create New Product</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -15,7 +15,7 @@
             <th>Delivery Time (min)</th>
             <th>Image</th>
             <th>Ingredients</th>
-           
+            <th>Add to Cart</th>
         </tr>
     </thead>
     <tbody>
@@ -51,10 +51,16 @@
                         <span>No ingredients</span>
                     }
                 </td>
-               
+                <td>
+                    <form asp-action="AddToCart" asp-controller="Cart" method="post">
+                        <input type="hidden" name="productId" value="@product.IdProduct" />
+                        <input type="number" name="quantity" value="1" min="1" />
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="@Url.Action("CreateProducts", "Products")" class="btn btn-success">Create New Product</a>
+

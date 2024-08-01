@@ -1,5 +1,6 @@
 using BE_Project_29_07_02_08.Context;
 using BE_Project_29_07_02_08.Services.Auth;
+using BE_Project_29_07_02_08.Services.Carts;
 using BE_Project_29_07_02_08.Services.Products;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +39,8 @@ builder.Services
 //SERVIZI
 builder.Services
     .AddScoped<IProductService, ProductService>()
-    .AddScoped<IAuthService, AuthService>();
+    .AddScoped<IAuthService, AuthService>()
+    .AddScoped<ICartService, CartService>();
 
 var app = builder.Build();
 
