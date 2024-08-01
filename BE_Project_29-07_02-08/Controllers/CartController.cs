@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
+    //todo: authorize /policy
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
@@ -17,7 +18,7 @@ namespace BE_Project_29_07_02_08.Controllers
             _cartService = cartService;
             _dataContext = dataContext;
         }
-
+        //todo:move to service
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(int productId, int quantity)

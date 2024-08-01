@@ -1,10 +1,10 @@
 using BE_Project_29_07_02_08.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
+    //todo: authorize /policy
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,7 +14,7 @@ namespace BE_Project_29_07_02_08.Controllers
             _logger = logger;
 
         }
-        [Authorize]
+
         public IActionResult Index()
         {
             return View();

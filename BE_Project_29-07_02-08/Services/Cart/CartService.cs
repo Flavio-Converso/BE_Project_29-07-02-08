@@ -5,6 +5,7 @@ using BE_Project_29_07_02_08.Services.Products;
 
 namespace BE_Project_29_07_02_08.Services.Carts
 {
+    //todo salva cart localstorage / altro
     public class CartService : ICartService
     {
         private readonly IProductService _productService;

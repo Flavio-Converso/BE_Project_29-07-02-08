@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
+    //todo: authorize /policy
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;

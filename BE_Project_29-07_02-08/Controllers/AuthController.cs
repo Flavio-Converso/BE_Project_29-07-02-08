@@ -7,6 +7,7 @@ using System.Security.Claims;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
+    //todo: authorize /policy
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
