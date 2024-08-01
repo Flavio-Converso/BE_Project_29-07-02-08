@@ -4,7 +4,7 @@ namespace BE_Project_29_07_02_08.Services.Ingredients
 {
     public interface IIngredientService
     {
-        public Ingredient CreateIngredient(Ingredient ingredient);
+        Task<Ingredient> CreateIngredient(Ingredient ingredient);
 
     }
 }

@@ -1,5 +1,7 @@
-﻿using BE_Project_29_07_02_08.Services.Orders;
+﻿using BE_Project_29_07_02_08.Context;
+using BE_Project_29_07_02_08.Services.Orders;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
@@ -8,10 +10,11 @@ namespace BE_Project_29_07_02_08.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;
-
-        public OrderController(IOrderService orderService)
+        private readonly DataContext _dataContext;
+        public OrderController(IOrderService orderService, DataContext dataContext)
         {
             _orderService = orderService;
+            _dataContext = dataContext;
         }
         [HttpGet]
         public async Task<IActionResult> GetAllOrders()
@@ -27,5 +30,15 @@ namespace BE_Project_29_07_02_08.Controllers
             await _orderService.IsProcessed(idOrder);
             return RedirectToAction("GetAllOrders");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProcessedOrdersCount()
+        {
+            var processedOrdersCount = await _dataContext.Orders.CountAsync(o => o.IsProcessed == true);
+
+            return Ok(processedOrdersCount);
+        }
+
+
     }
 }

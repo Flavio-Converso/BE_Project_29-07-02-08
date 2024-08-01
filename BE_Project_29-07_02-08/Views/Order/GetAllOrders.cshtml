@@ -6,6 +6,9 @@
 
 <h2>@ViewData["Title"]</h2>
 
+<button id="btnGetProcessedCount" class="btn-sm btn-primary">Processed Orders Count:</button>
+<span id="processedOrdersCount"></span>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -44,14 +47,14 @@
                     {
                         <form asp-action="IsProcessed" method="post">
                             <input type="hidden" name="idOrder" value="@order.IdOrder" />
-                            <button type="submit" class="btn btn-sm btn-primary">Mark as Processed</button>
+                            <button type="submit" class="btn btn-sm btn-success">Mark as Processed</button>
                         </form>
                     }
                     else
                     {
                         <form asp-action="IsProcessed" method="post">
-                        <input type="hidden" name="idOrder" value="@order.IdOrder" />
-                        <button class="btn btn-sm btn-secondary">Mark as non Processed</button>
+                            <input type="hidden" name="idOrder" value="@order.IdOrder" />
+                            <button class="btn btn-sm btn-warning">Mark as non Processed</button>
                         </form>
                     }
                 </td>
