@@ -9,5 +9,6 @@ namespace BE_Project_29_07_02_08.Services.Products
         Task<Product> CreateProductwIngredientsAsync(CreateProductViewModel viewModel);
         Task<List<Product>> GetAllProductswIngredientsAsync();
         Task<Product> GetProductByIdAsync(int IdProduct);
+        Task<CreateProductViewModel> GetCreateProductViewModelAsync();
     }
 }

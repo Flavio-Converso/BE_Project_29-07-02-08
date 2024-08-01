@@ -1,5 +1,4 @@
-﻿using BE_Project_29_07_02_08.Models;
-using BE_Project_29_07_02_08.Models.ViewModels;
+﻿using BE_Project_29_07_02_08.Models.ViewModels;
 using BE_Project_29_07_02_08.Services.Products;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,17 +16,7 @@ namespace BE_Project_29_07_02_08.Controllers
         [HttpGet("Products/CreateProducts")]
         public async Task<IActionResult> CreateProducts()
         {
-            var ingredients = await _productService.GetAllIngredientsAsync();
-            var viewModel = new CreateProductViewModel
-            {
-                Product = new Product
-                {
-                    Name = "",
-                    Price = 0.0m,
-                    DeliveryTimeMin = 0
-                },
-                Ingredients = ingredients
-            };
+            var viewModel = await _productService.GetCreateProductViewModelAsync();
             return View(viewModel);
         }
 
@@ -50,4 +39,3 @@ namespace BE_Project_29_07_02_08.Controllers
             return View(products);
         }
     }
-}
