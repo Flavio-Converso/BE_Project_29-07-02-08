@@ -54,7 +54,8 @@ namespace BE_Project_29_07_02_08.Controllers
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, existingUser.Username)
+                    new Claim(ClaimTypes.Name, existingUser.Username),
+                    new Claim(ClaimTypes.NameIdentifier, existingUser.IdUser.ToString())
                 };
 
                 existingUser.Roles.ForEach(r =>

@@ -24,6 +24,7 @@ namespace BE_Project_29_07_02_08.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProducts(CreateProductViewModel viewModel)
         {
+
             if (ModelState.IsValid)
             {
                 var product = await _productService.CreateProductwIngredientsAsync(viewModel);

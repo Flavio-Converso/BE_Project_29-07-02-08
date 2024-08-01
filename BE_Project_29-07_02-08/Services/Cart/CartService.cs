@@ -1,4 +1,6 @@
-﻿using BE_Project_29_07_02_08.Models.ViewModels;
+﻿using BE_Project_29_07_02_08.Context;
+using BE_Project_29_07_02_08.Models;
+using BE_Project_29_07_02_08.Models.ViewModels;
 using BE_Project_29_07_02_08.Services.Products;
 
 namespace BE_Project_29_07_02_08.Services.Carts
@@ -6,11 +8,15 @@ namespace BE_Project_29_07_02_08.Services.Carts
     public class CartService : ICartService
     {
         private readonly IProductService _productService;
+        private readonly DataContext _dataContext;
+
         private static List<CartItem> _temporaryCart = new List<CartItem>();
 
-        public CartService(IProductService productService)
+        public CartService(IProductService productService, DataContext dataContext)
         {
             _productService = productService;
+
+            _dataContext = dataContext;
         }
 
         public async Task AddToCartAsync(int productId, int quantity)
@@ -30,7 +36,7 @@ namespace BE_Project_29_07_02_08.Services.Carts
                         ProductId = product.IdProduct,
                         ProductName = product.Name,
                         Price = product.Price,
-                        Quantity = quantity,
+                        Quantity = quantity
                     };
                     _temporaryCart.Add(newCartItem);
                 }
@@ -57,5 +63,51 @@ namespace BE_Project_29_07_02_08.Services.Carts
             var totalAmount = _temporaryCart.Sum(c => c.Price * c.Quantity);
             return Task.FromResult(totalAmount);
         }
+
+        public Task<List<CartItem>> ClearCartAsync()
+        {
+            _temporaryCart.Clear();
+            return Task.FromResult(_temporaryCart);
+        }
+
+        public async Task CreateOrderAsync(Order o)
+        {
+            var cartItems = await GetCartItemsAsync();
+
+            // Retrieve the user ID from the current context
+
+
+
+            var order = new Order
+            {
+                Address = o.Address,
+                AdditionalNotes = o.AdditionalNotes,
+                IsProcessed = false,
+                OrderDate = DateTime.Now,
+                TotalAmount = await GetTotalAmountAsync(),
+                IdUser = o.IdUser,
+            };
+
+            _dataContext.Orders.Add(order);
+            await _dataContext.SaveChangesAsync();
+
+            foreach (var cartItem in cartItems)
+            {
+                var orderedProduct = new OrderedProduct
+                {
+                    IdOrder = order.IdOrder,
+                    IdProduct = cartItem.ProductId,
+                    Quantity = cartItem.Quantity
+                };
+
+                _dataContext.OrderedProducts.Add(orderedProduct);
+            }
+
+            await _dataContext.SaveChangesAsync();
+
+            await ClearCartAsync();
+        }
+
+
     }
 }
