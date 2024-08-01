@@ -74,10 +74,6 @@ namespace BE_Project_29_07_02_08.Services.Carts
         {
             var cartItems = await GetCartItemsAsync();
 
-            // Retrieve the user ID from the current context
-
-
-
             var order = new Order
             {
                 Address = o.Address,

@@ -44,5 +44,18 @@ else
             </tr>
         </tbody>
     </table>
+    <button id="showCheckoutBtn" class="btn btn-primary">Checkout</button>
+    <div id="checkoutDiv" style="display: none;">
+        @Html.Partial("Checkout", Model)
+    </div>
 }
-<a asp-controller="Cart" asp-action="Checkout" class="btn btn-success">Checkout</a>
+
+
+    <script>
+        document.getElementById('showCheckoutBtn').addEventListener('click', function () {
+            var checkoutDiv = document.getElementById('checkoutDiv');
+            if (checkoutDiv.style.display === 'none') {
+                checkoutDiv.style.display = 'block';
+            } 
+        });
+    </script>

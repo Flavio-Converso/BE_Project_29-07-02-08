@@ -56,7 +56,7 @@ namespace BE_Project_29_07_02_08.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(string address, string additionalNotes)
         {
-            var userName = User.Identity.Name;
+            var userName = User.Identity!.Name;
             var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Username == userName);
             try
             {
@@ -64,7 +64,7 @@ namespace BE_Project_29_07_02_08.Controllers
                 {
                     Address = address,
                     AdditionalNotes = additionalNotes,
-                    IdUser = user.IdUser
+                    IdUser = user!.IdUser
                 };
 
                 await _cartService.CreateOrderAsync(order);
