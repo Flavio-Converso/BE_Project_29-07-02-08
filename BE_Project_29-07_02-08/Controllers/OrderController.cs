@@ -42,7 +42,9 @@ namespace BE_Project_29_07_02_08.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTotalIncome()
         {
-            var totalIncome = await _dataContext.Orders.SumAsync(o => o.TotalAmount);
+            var totalIncome = await _dataContext.Orders
+                .Where(o => o.IsProcessed == true) //remove if you want to get total income of all orders (not only processed)
+                .SumAsync(o => o.TotalAmount);
             return Ok(totalIncome);
         }
     }

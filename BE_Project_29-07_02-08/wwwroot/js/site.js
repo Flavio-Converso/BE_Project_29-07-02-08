@@ -1,4 +1,5 @@
 ﻿let firstPath = '/Order/GetProcessedOrdersCount';
+
 let secondPath = '/Order/GetTotalIncome';
 function getProcessedOrdersCount() {
     $.ajax({
