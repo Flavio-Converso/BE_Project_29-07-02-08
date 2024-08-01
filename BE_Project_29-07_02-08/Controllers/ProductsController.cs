@@ -19,7 +19,7 @@ namespace BE_Project_29_07_02_08.Controllers
         public async Task<IActionResult> CreateProducts()
         {
             var ingredients = await _productService.GetAllIngredientsAsync();
-            var viewModel = new ProductCreateViewModel
+            var viewModel = new CreateProductViewModel
             {
                 Product = new Product
                 {
@@ -31,10 +31,10 @@ namespace BE_Project_29_07_02_08.Controllers
             };
             return View(viewModel);
         }
-        //[Authorize(Policy = "AdminPolicy")]
+        [Authorize(Policy = "AdminPolicy")]
         [HttpPost("Products/CreateProducts")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProducts(ProductCreateViewModel viewModel)
+        public async Task<IActionResult> CreateProducts(CreateProductViewModel viewModel)
         {
             if (ModelState.IsValid)
             {

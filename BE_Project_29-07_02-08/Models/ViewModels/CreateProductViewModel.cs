@@ -1,6 +1,6 @@
 ﻿namespace BE_Project_29_07_02_08.Models.ViewModels
 {
-    public class ProductCreateViewModel
+    public class CreateProductViewModel
     {
         public required Product Product { get; set; }
         public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();

@@ -18,7 +18,7 @@ namespace BE_Project_29_07_02_08.Services.Products
         {
             return await _dataContext.Ingredients.ToListAsync();
         }
-        public async Task<Product> CreateProductwIngredientsAsync(ProductCreateViewModel viewModel)
+        public async Task<Product> CreateProductwIngredientsAsync(CreateProductViewModel viewModel)
         {
             var product = viewModel.Product;
 
@@ -47,6 +47,12 @@ namespace BE_Project_29_07_02_08.Services.Products
             return await _dataContext.Products
                 .Include(p => p.Ingredients)
                 .ToListAsync();
+        }
+
+        public async Task<Product> GetProductByIdAsync(int productId)
+        {
+            var productById = await _dataContext.Products.FirstOrDefaultAsync(p => p.IdProduct == productId);
+            return productById;
         }
     }
 }
