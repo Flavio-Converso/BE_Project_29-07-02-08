@@ -19,7 +19,7 @@ function getProcessedOrdersCount() {
 function getTotalIncome() {
     let date = $('#dateInput').val(); 
     if (!date) {
-        alert('Please select a date.');
+        alert('Seleziona una data');
         return;
     }
 
@@ -29,7 +29,7 @@ function getTotalIncome() {
         success: (data) => {
             const countElement = $('#totalIncome');
             countElement.addClass('border border-dark px-2 fs-4');
-            countElement.text(`Total Income for ${date}: €${data}`);
+            countElement.text(`Incassi per il ${date}: €${data}`);
         },
         error: (err) => {
             console.error('Error fetching total income:', err);
