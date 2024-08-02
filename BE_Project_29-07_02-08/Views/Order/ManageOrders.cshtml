@@ -71,6 +71,11 @@
                             <button class="btn btn-sm btn-warning">Segna come non evaso</button>
                         </form>
                     }
+                    <form asp-action="DeleteOrder"  method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="idOrder" value="@order.IdOrder" />
+                        <button type="submit" class="btn-sm btn-danger">Elimina</button>
+                    </form>
                 </td>
             </tr>
         }

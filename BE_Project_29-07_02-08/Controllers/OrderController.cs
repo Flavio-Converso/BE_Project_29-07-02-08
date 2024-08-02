@@ -53,6 +53,13 @@ namespace BE_Project_29_07_02_08.Controllers
             return Ok(totalIncome);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteOrder(int idOrder)
+        {
+            await _orderService.DeleteOrderAsync(idOrder);
+            return RedirectToAction("ProductsList", "Products");
+        }
     }
 }
 
