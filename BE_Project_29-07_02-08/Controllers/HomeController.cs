@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
-    //todo: authorize /policy
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

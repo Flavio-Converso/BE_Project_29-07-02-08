@@ -1,12 +1,14 @@
 ﻿using BE_Project_29_07_02_08.Context;
 using BE_Project_29_07_02_08.Models;
 using BE_Project_29_07_02_08.Services.Carts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
-    //todo: authorize /policy
+
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
@@ -28,6 +30,7 @@ namespace BE_Project_29_07_02_08.Controllers
         }
 
         [HttpGet]
+
         public async Task<IActionResult> ViewCart()
         {
             var cartItems = await _cartService.GetCartItemsAsync();
@@ -45,6 +48,7 @@ namespace BE_Project_29_07_02_08.Controllers
         }
 
         [HttpGet]
+
         public async Task<IActionResult> Checkout()
         {
             var cartItems = await _cartService.GetCartItemsAsync();

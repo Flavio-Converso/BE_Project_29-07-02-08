@@ -49,6 +49,7 @@
                     @if (!order.IsProcessed)
                     {
                         <form asp-action="IsProcessed" method="post">
+                            @Html.AntiForgeryToken()
                             <input type="hidden" name="idOrder" value="@order.IdOrder" />
                             <button type="submit" class="btn btn-sm btn-success">Mark as Processed</button>
                         </form>
@@ -56,6 +57,7 @@
                     else
                     {
                         <form asp-action="IsProcessed" method="post">
+                            @Html.AntiForgeryToken()
                             <input type="hidden" name="idOrder" value="@order.IdOrder" />
                             <button class="btn btn-sm btn-warning">Mark as non Processed</button>
                         </form>

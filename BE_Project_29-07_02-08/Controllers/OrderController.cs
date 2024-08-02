@@ -1,12 +1,13 @@
 ﻿using BE_Project_29_07_02_08.Context;
 using BE_Project_29_07_02_08.Services.Orders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
 
-    //todo: authorize /policy
+    [Authorize(Policy = "AdminPolicy")]
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;

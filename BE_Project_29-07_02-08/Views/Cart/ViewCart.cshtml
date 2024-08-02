@@ -32,6 +32,7 @@ else
                     <td>@(item.Price * item.Quantity)€</td>
                     <td>
                         <form asp-action="RemoveFromCart" asp-controller="Cart" method="post">
+                            @Html.AntiForgeryToken()
                             <input type="hidden" name="productId" value="@item.ProductId" />
                             <button type="submit" class="btn btn-danger">Remove</button>
                         </form>

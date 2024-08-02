@@ -1,10 +1,11 @@
 ﻿using BE_Project_29_07_02_08.Models.ViewModels;
 using BE_Project_29_07_02_08.Services.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
-    //todo: authorize /policy
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
@@ -15,14 +16,17 @@ namespace BE_Project_29_07_02_08.Controllers
         }
 
         [HttpGet("Products/CreateProducts")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> CreateProducts()
         {
             var viewModel = await _productService.GetCreateProductViewModelAsync();
             return View(viewModel);
         }
 
+
         [HttpPost("Products/CreateProducts")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> CreateProducts(CreateProductViewModel viewModel)
         {
 

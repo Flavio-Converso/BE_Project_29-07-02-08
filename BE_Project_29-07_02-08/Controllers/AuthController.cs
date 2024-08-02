@@ -2,12 +2,12 @@
 using BE_Project_29_07_02_08.Services.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace BE_Project_29_07_02_08.Controllers
 {
-    //todo: authorize /policy
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
@@ -76,7 +76,7 @@ namespace BE_Project_29_07_02_08.Controllers
                 return View(user);
             }
         }
-
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
