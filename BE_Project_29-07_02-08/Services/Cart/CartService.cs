@@ -2,6 +2,7 @@
 using BE_Project_29_07_02_08.Models;
 using BE_Project_29_07_02_08.Models.ViewModels;
 using BE_Project_29_07_02_08.Services.Products;
+using Microsoft.EntityFrameworkCore;
 
 namespace BE_Project_29_07_02_08.Services.Carts
 {
@@ -16,7 +17,6 @@ namespace BE_Project_29_07_02_08.Services.Carts
         public CartService(IProductService productService, DataContext dataContext)
         {
             _productService = productService;
-
             _dataContext = dataContext;
         }
 
@@ -105,6 +105,37 @@ namespace BE_Project_29_07_02_08.Services.Carts
             await ClearCartAsync();
         }
 
+        public async Task<(List<CartItem> CartItems, decimal TotalAmount)> GetOrderSummaryAsync()
+        {
+            var cartItems = await GetCartItemsAsync();
+            var totalAmount = await GetTotalAmountAsync();
+            return (cartItems, totalAmount);
+        }
 
+        public async Task<bool> ProcessCheckoutAsync(string userName, string address, string additionalNotes)
+        {
+            try
+            {
+                var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Username == userName);
+                if (user == null)
+                {
+                    return false;
+                }
+
+                var order = new Order
+                {
+                    Address = address,
+                    AdditionalNotes = additionalNotes,
+                    IdUser = user.IdUser
+                };
+
+                await CreateOrderAsync(order);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
