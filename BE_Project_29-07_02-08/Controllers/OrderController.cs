@@ -18,7 +18,7 @@ namespace BE_Project_29_07_02_08.Controllers
             _dataContext = dataContext;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllOrders()
+        public async Task<IActionResult> ManageOrders()
         {
             var orders = await _orderService.GetAllOrders();
             return View(orders);
@@ -29,7 +29,7 @@ namespace BE_Project_29_07_02_08.Controllers
         public async Task<IActionResult> IsProcessed(int idOrder)
         {
             await _orderService.IsProcessed(idOrder);
-            return RedirectToAction("GetAllOrders");
+            return RedirectToAction("ManageOrders");
         }
 
         [HttpGet]

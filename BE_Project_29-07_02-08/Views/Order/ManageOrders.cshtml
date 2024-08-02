@@ -1,28 +1,28 @@
 ﻿@model List<BE_Project_29_07_02_08.Models.Order>
 
 @{
-    ViewData["Title"] = "Order List";
+    ViewData["Title"] = "Lista di Ordini";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<button id="btnGetProcessedCount" class="btn-sm btn-primary">Processed Orders Count:</button>
+<button id="btnGetProcessedCount" class="btn-sm btn-primary">N. Ordini processati:</button>
 <span id="processedOrdersCount"></span>
 
-<button id="btnGetTotalIncome" class="btn-sm btn-primary">Total income:</button>
+<button id="btnGetTotalIncome" class="btn-sm btn-primary">Tot. incassi:</button>
 <span id="totalIncome"></span>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>IdOrder</th>
-            <th>Address</th>
-            <th>Additional Notes</th>
-            <th>Is Processed</th>
-            <th>Order Date</th>
-            <th>Total Amount</th>
-            <th>IdUser</th>
-            <th>Actions</th>
+            <th>Id Ordine</th>
+            <th>Indirizzo</th>
+            <th>Note aggiuntive</th>
+            <th>Evaso (s/n)</th>
+            <th>Data ordine</th>
+            <th>Tot. incassi</th>
+            <th>Id Utente</th>
+            <th>Azioni</th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +35,7 @@
                 <td>
                     @if (order.IsProcessed)
                     {
-                        <span class="badge bg-success">Yes</span>
+                        <span class="badge bg-success">Si</span>
                     }
                     else
                     {
@@ -51,7 +51,7 @@
                         <form asp-action="IsProcessed" method="post">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="idOrder" value="@order.IdOrder" />
-                            <button type="submit" class="btn btn-sm btn-success">Mark as Processed</button>
+                            <button type="submit" class="btn btn-sm btn-success">Evadi ordine</button>
                         </form>
                     }
                     else
@@ -59,7 +59,7 @@
                         <form asp-action="IsProcessed" method="post">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="idOrder" value="@order.IdOrder" />
-                            <button class="btn btn-sm btn-warning">Mark as non Processed</button>
+                            <button class="btn btn-sm btn-warning">Segna come non evaso</button>
                         </form>
                     }
                 </td>

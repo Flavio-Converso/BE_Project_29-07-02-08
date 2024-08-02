@@ -5,28 +5,28 @@
 <form asp-action="CreateProducts" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <label asp-for="Product.Name"></label>
+        <label asp-for="Product.Name">Nome</label>
         <input asp-for="Product.Name" class="form-control" />
         <span asp-validation-for="Product.Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Product.Price"></label>
+        <label asp-for="Product.Price">Prezzo</label>
         <input asp-for="Product.Price" class="form-control" />
         <span asp-validation-for="Product.Price" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="Image">Image</label>
+        <label for="Image">Immagine</label>
         <input type="file" name="Image" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Product.DeliveryTimeMin"></label>
+        <label asp-for="Product.DeliveryTimeMin">Tempo di consegna</label>
         <input asp-for="Product.DeliveryTimeMin" class="form-control" />
         <span asp-validation-for="Product.DeliveryTimeMin" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label>Ingredients</label>
+        <label>Ingredienti</label>
         <div>
             @for (int i = 0; i < Model.Ingredients.Count; i++)
             {
@@ -41,5 +41,5 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create Product</button>
+    <button type="submit" class="btn btn-primary">Crea prodotto</button>
 </form>

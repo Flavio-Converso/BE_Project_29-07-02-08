@@ -31,7 +31,7 @@ namespace BE_Project_29_07_02_08.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> ViewCart()
+        public async Task<IActionResult> RiepilogoOrdine()
         {
             var cartItems = await _cartService.GetCartItemsAsync();
             var totalAmount = await _cartService.GetTotalAmountAsync();
@@ -44,7 +44,7 @@ namespace BE_Project_29_07_02_08.Controllers
         public async Task<IActionResult> RemoveFromCart(int productId)
         {
             await _cartService.RemoveFromCartAsync(productId);
-            return RedirectToAction("ViewCart");
+            return RedirectToAction("RiepilogoOrdine");
         }
 
         [HttpGet]
