@@ -41,13 +41,18 @@ namespace BE_Project_29_07_02_08.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTotalIncome()
+        public async Task<IActionResult> GetTotalIncome(DateTime date)
         {
             var totalIncome = await _dataContext.Orders
-                .Where(o => o.IsProcessed == true) //remove if you want to get total income of all orders (not only processed)
+                .Where(
+                o => o.IsProcessed == true  //remove if you want to get total income of all orders
+                && o.OrderDate.Date == date.Date
+                    )
                 .SumAsync(o => o.TotalAmount);
+
             return Ok(totalIncome);
         }
+
     }
 }
 

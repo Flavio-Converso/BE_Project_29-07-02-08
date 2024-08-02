@@ -6,11 +6,21 @@
 
 <h2>@ViewData["Title"]</h2>
 
+
 <button id="btnGetProcessedCount" class="btn-sm btn-primary">N. Ordini processati:</button>
 <span id="processedOrdersCount"></span>
 
-<button id="btnGetTotalIncome" class="btn-sm btn-primary">Tot. incassi:</button>
-<span id="totalIncome"></span>
+
+    <div>
+        <h3>Get Total Income for a Specific Date</h3>
+        <div class="form-group">
+            <label for="dateInput">Select Date:</label>
+            <input type="date" id="dateInput" class="form-control">
+        </div>
+        <button id="btnGetTotalIncome" class="btn btn-primary">Get Total Income</button>
+        <div id="totalIncome" class="mt-3"></div>
+    </div>
+
 
 <table class="table table-striped">
     <thead>

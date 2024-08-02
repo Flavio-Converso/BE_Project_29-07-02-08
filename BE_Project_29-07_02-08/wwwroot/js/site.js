@@ -17,13 +17,19 @@ function getProcessedOrdersCount() {
 }
 
 function getTotalIncome() {
+    let date = $('#dateInput').val(); 
+    if (!date) {
+        alert('Please select a date.');
+        return;
+    }
+
     $.ajax({
-        url: secondPath,
+        url: `${secondPath}?date=${date}`, 
         method: 'GET',
         success: (data) => {
             const countElement = $('#totalIncome');
             countElement.addClass('border border-dark px-2 fs-4');
-            countElement.text(data + "€"); 
+            countElement.text(`Total Income for ${date}: €${data}`);
         },
         error: (err) => {
             console.error('Error fetching total income:', err);
@@ -31,12 +37,11 @@ function getTotalIncome() {
     });
 }
 
+$('#btnGetTotalIncome').on('click', () => {
+    getTotalIncome();
+});
 
 $('#btnGetProcessedCount').on('click', () => {
     getProcessedOrdersCount();
-});
-
-$('#btnGetTotalIncome').on('click', () => {
-    getTotalIncome();
 });
 
