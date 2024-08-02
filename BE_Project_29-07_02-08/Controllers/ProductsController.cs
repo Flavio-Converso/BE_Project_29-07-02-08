@@ -38,6 +38,16 @@ namespace BE_Project_29_07_02_08.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminPolicy")]
+        public async Task<IActionResult> DeleteProduct(int productId)
+        {
+            await _productService.DeleteProductAsync(productId);
+            return RedirectToAction("ProductsList");
+        }
+
+
         [HttpGet("Products/ProductsList")]
         public async Task<IActionResult> ProductsList()
         {

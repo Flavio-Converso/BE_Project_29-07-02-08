@@ -70,5 +70,16 @@ namespace BE_Project_29_07_02_08.Services.Products
             var productById = await _dataContext.Products.FirstOrDefaultAsync(p => p.IdProduct == productId);
             return productById;
         }
+
+        public async Task DeleteProductAsync(int productId)
+        {
+            var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.IdProduct == productId);
+            if (product != null)
+            {
+                _dataContext.Products.Remove(product);
+                await _dataContext.SaveChangesAsync();
+                return;
+            }
+        }
     }
 }
