@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BE_Project_29_07_02_08.Services.Carts
 {
-    //todo salva cart localstorage / altro
+    //todo salva cart localstorage / session
     public class CartService : ICartService
     {
         private readonly IProductService _productService;

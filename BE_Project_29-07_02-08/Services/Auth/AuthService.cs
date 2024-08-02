@@ -28,7 +28,7 @@ namespace BE_Project_29_07_02_08.Services.Auth
 
             var existingUser = await _dataContext.Users
                  .Include(u => u.Roles)
-                 .Where(u => u.Username == user.Username && u.Password == hashedPassword || u.Password == user.Password) //todo: remove u.Password == user.Password 
+                 .Where(u => u.Username == user.Username && u.Password == hashedPassword)
                  .FirstOrDefaultAsync();
 
             if (existingUser == null)
