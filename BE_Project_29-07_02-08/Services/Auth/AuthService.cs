@@ -1,8 +1,6 @@
 ﻿using BE_Project_29_07_02_08.Context;
 using BE_Project_29_07_02_08.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace BE_Project_29_07_02_08.Services.Auth
 {
@@ -14,18 +12,9 @@ namespace BE_Project_29_07_02_08.Services.Auth
             _dataContext = dataContext;
         }
 
-        //todo: move this to a helper class
-        private static string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(bytes);
-            }
-        }
         public async Task<User> RegisterAsync(User user)
         {
-            user.Password = HashPassword(user.Password);
+            user.Password = PasswordHasher.HashPassword(user.Password);
             var userRole = await _dataContext.Roles.Where(r => r.IdRole == 2).FirstOrDefaultAsync();
             user.Roles.Add(userRole);
             await _dataContext.Users.AddAsync(user);
@@ -33,10 +22,9 @@ namespace BE_Project_29_07_02_08.Services.Auth
             return user;
         }
 
-
         public async Task<User> LoginAsync(User user)
         {
-            string hashedPassword = HashPassword(user.Password);
+            string hashedPassword = PasswordHasher.HashPassword(user.Password);
 
             var existingUser = await _dataContext.Users
                  .Include(u => u.Roles)
